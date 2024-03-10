@@ -1,0 +1,18 @@
+def snail(snail_map):
+    results=[]
+    order=len(snail_map[0])
+    a,b=0,0
+    while order>0:
+        for i in range(a,a+order):
+            results.append(snail_map[b][i])
+        order-=1
+        b+=1
+        for i in range(b,b+order):
+            results.append(snail_map[i][a+order])
+        for i in range(a+order-1,a-1,-1):
+            results.append(snail_map[b+order-1][i])
+        order-=1
+        for i in range(b+order-1,b-1,-1):
+            results.append(snail_map[i][a])
+        a+=1        
+    return results

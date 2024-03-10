@@ -1,0 +1,10 @@
+def strip_comments(strng, string):
+    sep=strng.split('\n')
+    for i in range(len(sep)):
+        s=sep[i]
+        for char in string:
+            index=s.find(char)
+            if index >= 0:
+                s=s[:index].rstrip()
+        sep[i]=s
+    return '\n'.join(sep)

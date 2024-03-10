@@ -1,0 +1,19 @@
+def dbl_linear(n):
+    series=[1] 
+    i,j=0,0
+    sav=0
+    while(i+j<=n+sav): 
+        u1=2*series[i]+1 
+        u2=3*series[j]+1         
+        if u1>u2 : 
+            series.append(u2)
+            j+=1 
+        elif u1<u2 : 
+            series.append(u1)
+            i+=1 
+        else : 
+            series.append(u1)
+            i+=1 
+            j+=1
+            sav+=1
+    return series[n]

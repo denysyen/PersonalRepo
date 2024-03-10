@@ -1,0 +1,34 @@
+def possible_number(firstPoint, length):
+    group=[]
+    symetries={"1":[5,31,154,684,2516,7104,13792,13792],"2":[7,37,188,816,2926,8118,15564,15564],
+                  "3":[8,48,256,1152,4248,12024,23280,23280]} 
+    if firstPoint == "A" or firstPoint == "C" or firstPoint == "G" or firstPoint == "I":
+        group=symetries["1"]
+    elif firstPoint == "B" or firstPoint == "D" or firstPoint == "H" or firstPoint == "F":
+        group=symetries["2"]
+    else:
+        group=symetries["3"]
+    return group[length-2]
+def count_patterns_from(firstPoint, length):
+    numWays=1
+    square=["" for i in range(9)]
+    square[0]="A"
+    square[1]="B"
+    square[2]="C"
+    square[3]="D"
+    square[4]="E"
+    square[5]="F"
+    square[6]="G"
+    square[7]="H"
+    square[8]="I"
+    if length==0 or length>9:
+        return 0
+    elif length==1:
+        return 1
+    elif length>=2:
+        for i in range(9):
+            if square[i]==firstPoint:
+                start=i
+                currPos=square[i]
+        test=possible_number(currPos,length)
+        return test
