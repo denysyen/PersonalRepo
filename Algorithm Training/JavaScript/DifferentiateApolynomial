@@ -1,0 +1,13 @@
+function differentiate(equation, point){
+  function getExp(match){
+    var exp = match.match(/(?<=x\^)\d+/)[0];
+    var derivate = exp+"*Math.pow("+point+","+(exp-1)+")";
+    return derivate
+}
+  var str = equation
+              .replace(/[\-\+]\d+$|(?<=\d+)x(?!\^)/g,"")
+              .replace(/(\d+)(?=x)/g, "$1*")
+              .replace(/x\^\d+/g, getExp)
+              .replace(/x/, 1);
+  return eval(str);
+}

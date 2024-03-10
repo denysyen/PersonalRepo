@@ -1,0 +1,39 @@
+def bowling_score(frames):
+    score = list(''.join(frames.split()))
+    sum=0
+    print(len(score))
+    print(score)
+    for i in range(len(score)):
+        if score[i] == 'X':
+            score[i]=10
+        elif score[i]=='/':
+            continue
+        else:
+            score[i]=int(score[i])  
+    for x in range(len(score)):
+        frame=score[x]
+        if len(score)-3<=x:
+            if frame=='/':
+                sum+=(10-score[x-1])
+            else:
+                sum+=frame
+            continue
+        elif frame==10:
+            sum+=frame
+            sum+=score[x+1]
+            if score[x+2] == '/':
+                sum+=(10-score[x+1])
+            else:
+                sum+=score[x+2]
+        elif frame=='/':
+            sum+=(10-score[x-1])
+            sum+=score[x+1]
+        else:
+            sum+=frame
+    if score[len(score)-3]=='/':
+        sum+=score[len(score)-2]
+    if score[len(score)-3]=='X':
+        residual=score[len(score)-2]+score[len(score)-1]
+        print(residual)
+        sum+=residual
+    return sum     

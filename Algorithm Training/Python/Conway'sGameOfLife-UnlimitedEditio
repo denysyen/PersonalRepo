@@ -1,0 +1,42 @@
+from itertools import product
+def convert_table_to_set(board):
+    ni = len(board)
+    nj = len(board[0])
+    s = set()
+    for i in range(ni):
+        for j in range(nj):
+            if board[i][j]:
+                s.add((i, j))
+    return s
+def convert_set_to_table(s):
+    if not s:
+        mi = mj = ni = nj = 0
+    else:
+        xmin = min(map(lambda x: x[0], s))
+        ymin = min(map(lambda x: x[1], s))    
+        xmax =  max(map(lambda x: x[0], s)) 
+        ymax = max(map(lambda x: x[1], s))
+    indexi = xmax - xmin + 1
+    indexj = ymax - ymin + 1
+    board = [[False for j in range(indexj)] for i in range(indexi)]
+    for (i, j) in s:
+        board[i - xmin][j - ymin] = True
+    return board
+def get_generation(cells, generations):
+    cells = convert_table_to_set(cells)
+    for n in range(generations):
+        cells_nearBy,cells_new = set(), set()     
+        for (i, j) in cells:
+            for (x, y) in product((-1, 0, 1), (-1, 0, 1)):
+                cells_nearBy.add((i + x, j + y))
+        for (i, j) in cells_nearBy:
+            closer = 0
+            for (x, y) in product((-1, 0, 1), (-1, 0, 1)):
+                if (i + x, j + y) in cells and (x, y) != (0, 0):
+                    closer += 1
+            if closer == 3:
+                cells_new.add((i, j))
+            elif closer == 2 and (i, j) in cells:
+                cells_new.add((i, j))
+        cells = cells_new
+    return convert_set_to_table(cells)

@@ -1,0 +1,13 @@
+function solveExpression(exp) {
+  var operatorList = /(?:^|[\+\-\*\=])0\d/;
+  exp = exp.replace('=', '==').replace(/\-\-/g, '- -').replace(/\+\+/g, '+ +');
+  for (let i = 0; i <= 9; i++) {
+    var temp = exp
+    if (temp.includes(i)) continue;
+    temp = temp.replace(/\?/g, i);
+    if (operatorList.test(temp)) continue;
+      if (eval(temp)) return i;
+  }
+  return -1;
+  
+}

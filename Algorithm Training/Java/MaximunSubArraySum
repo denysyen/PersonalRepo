@@ -1,0 +1,17 @@
+public class Max {
+  public static int sequence(int[] arr) {
+    int sum = 0;
+    int tmp = 0;
+    for( int j = 0;  j < arr.length; j++) {
+      if(tmp + arr[j] > tmp || tmp + arr[j] > 0 ) {
+        tmp = tmp + arr[j]; 
+      } else {
+        tmp = 0;
+      }
+      if( tmp > sum) {
+        sum = tmp;
+      }
+    }
+    return sum;
+  }
+}
