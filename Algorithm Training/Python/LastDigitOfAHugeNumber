@@ -1,0 +1,12 @@
+def last_digit(lst):
+    if lst==[]:
+        return 1
+    else:
+        pow=1
+        for i in lst[len(lst):0:-1]:
+            pow=i**pow
+            if pow>2:
+                pow=pow-2
+                pow=pow%4
+                pow=pow+2
+    return lst[0]**pow% 10
