@@ -1,0 +1,12 @@
+def longest_slide_down(pyramid):
+    size=len(pyramid)
+    path=[[0 for j in range(len(pyramid[i]))] for i in range(size)]
+    for i in range(0, size):
+        for j in range(len(pyramid[i])):
+            if j>0 and j<len(pyramid[i])-1:
+                path[i][j]=max(path[i][j],path[i-1][j]+pyramid[i][j],path[i-1][j-1]+pyramid[i][j])
+            elif j==0:
+                path[i][j]=max(path[i][j],path[i-1][j]+pyramid[i][j])
+            else:
+                path[i][j]=max(path[i][j],path[i-1][j-1]+pyramid[i][j])
+    return max(path[size-1])

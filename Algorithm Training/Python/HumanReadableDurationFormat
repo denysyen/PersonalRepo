@@ -1,0 +1,56 @@
+def format_duration(seconds):
+    finalR=""
+    years, seconds = divmod(seconds, 31536000)
+    seconds = seconds % (31536000)
+    days, seconds = divmod(seconds, 86400)
+    seconds %= 86400
+    hours, seconds = divmod(seconds, 3600)
+    seconds %= 3600
+    minutes, seconds = divmod(seconds, 60)
+    seconds %= 60
+    if years==1:
+        finalR="%01d" % (years)+ " "+ "year, "
+    elif years>1:
+        finalR="%01d" % (years)+ " "+ "years, "
+    else:
+        finalR+=""
+    if days==1:
+        finalR+="%01d" % (days)+ " "+ "day, "
+    elif days>1:
+        finalR+="%01d" % (days)+ " "+ "days, "
+    else:
+        finalR+=""
+    if hours==1 and minutes!=0:
+        finalR+="%01d" % (hours)+ " "+ "hour, "
+    elif hours>1 and minutes!=0 and seconds!=0:
+        finalR+="%01d" % (hours)+ " "+ "hours, "
+    elif hours==1 and minutes==0:
+        finalR+="%01d" % (hours)+ " "+ "hour"
+    elif hours>1 and minutes==0 :
+        finalR+="%01d" % (hours)+ " "+ "hours and "
+    elif hours>1 and seconds==0:
+        finalR+="%01d" % (hours)+ " "+ "hours and "
+    else:
+        finalR+=""
+    if minutes==1 and seconds!=0:
+        finalR+="%01d" % (minutes)+ " "+ "minute and "
+    if minutes==1 and seconds==0:
+        finalR+="%01d" % (minutes)+ " "+ "minute"
+    elif minutes>1 and seconds!=0:
+        finalR+="%01d" % (minutes)+ " "+ "minutes and "
+    elif minutes>1 and seconds==0:
+        finalR+= "%01d" % (minutes)+ " "+ "minutes"
+    elif minutes>1 and seconds==0 and hours==0 and days==0:
+        finalR+= "and" + " " +"%01d" % (minutes)+ " "+ "minutes"
+    else:
+        finalR+=""
+    if seconds==1:
+        finalR+="%01d" % (seconds)+ " "+ "second"
+    elif seconds>1:
+        finalR+="%01d" % (seconds)+ " "+ "seconds"
+    else:
+        finalR+=""
+    if finalR=="":
+        finalR="now"
+    return finalR
+    #your code here

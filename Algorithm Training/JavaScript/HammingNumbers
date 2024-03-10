@@ -1,0 +1,13 @@
+function hamming (n) {
+  var coefficients = [2,3,5]
+  var indexI = 0, indexJ = 0, indexK = 0;
+  var secuence = [1];
+  for (var i = 1; i < n; i++) {
+    var exp = Math.min(coefficients[0] * secuence[indexI], coefficients[1] * secuence[indexJ], coefficients[2] * secuence[indexK]);
+    secuence.push(exp);
+    if (coefficients[0] * secuence[indexI] <= exp) indexI++;  
+    if (coefficients[1] * secuence[indexJ] <= exp) indexJ++;
+    if (coefficients[2] * secuence[indexK] <= exp) indexK++;
+  }
+  return secuence[n-1];
+}
