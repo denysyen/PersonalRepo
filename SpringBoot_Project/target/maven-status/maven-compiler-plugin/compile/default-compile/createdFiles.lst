@@ -1,0 +1,10 @@
+com/repositories/UserRepository.class
+com/controller/UserController.class
+com/configuration/PasswordConfig.class
+com/component/LoadUserslnDB.class
+com/service/impl/UserServiceImpl.class
+com/service/UserService.class
+com/DemoBackendApplication.class
+com/configuration/SecurityConfig.class
+com/controller/Valid.class
+com/model/User.class
