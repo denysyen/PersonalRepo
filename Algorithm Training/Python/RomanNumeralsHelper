@@ -1,0 +1,25 @@
+class RomanNumerals:
+    def to_roman(val):
+        translation_rom=["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV","I"]
+        translation_num=[ 1000, 900, 500, 400,100, 90, 50, 40,10, 9, 5, 4,1]
+        roman_num=''
+        i=0
+        while val > 0:        
+            for _ in range(val//translation_num[i]):
+                roman_num+=translation_rom[i]
+                val-=translation_num[i]
+            i+=1
+        return roman_num
+
+    def from_roman(roman_num):
+        translation_list = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+        latin_num=0
+        previous_latin=0
+        for i in roman_num[::-1]:              
+            current_elemt = translation_list[i]
+            if current_elemt >= previous_latin:        
+                latin_num += current_elemt         
+                previous_latin = current_elemt
+            else:                                      
+                latin_num -= current_elemt       
+        return latin_num

@@ -1,0 +1,8 @@
+def permutations(s):
+    import itertools
+    results=[]
+    string_permutations = itertools.permutations(s)
+    string_permutations = list(string_permutations)
+    string_permutations = [''.join(permutation) for permutation in string_permutations]
+    results = list(dict.fromkeys(string_permutations))
+    return results 

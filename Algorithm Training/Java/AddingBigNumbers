@@ -1,0 +1,105 @@
+import java.util.*;
+public class Kata {
+  public static String[] removingZeros(String a, String b) {
+    String newA ="";
+    String newB ="";
+    String[] result = new String[2];
+    if(a.split("")[0].equals("0")){
+      int j = 0;
+      while(a.split("")[j].equals("0")) {
+        newA = a.substring(j+1);
+        j++;
+      }
+    } else {
+      newA = a;
+    }
+    if(b.split("")[0].equals("0")) {
+      int j = 0;
+      while(b.split("")[j].equals("0")) {
+         newB = b.substring(j+1);
+        j++;
+      }      
+    } else {
+      newB = b;
+    }
+
+    result[0] = newA;
+    result[1] = newB;
+    return result;
+  }
+  public static String[][] pairingStrings(String[] a, String[] b) {
+    int large = Math.max(a.length, b.length);
+    int small = Math.min(a.length, b.length);
+    String[][] results = new String[2][large];
+    int diff = large - small; 
+    if(diff == 0) {
+      for(int i = 0; i < large; i++) {
+         results[1][i] = a[i];
+         results[0][i] = b[i];
+      }
+      return results;
+    } else {
+      if(a.length == small) {
+      String[] aNew = new String[large];
+      for(int i = 0; i < large; i++) {
+        if(i < diff) {
+          aNew[i] = "0";
+        } else {          
+          aNew[i] = a[i-diff];
+        }
+       results[1][i] = aNew[i];
+       results[0][i] = b[i];
+      }
+    } else {
+      String[] bNew = new String[large];
+      for(int i = 0; i < large; i++) {
+        if(i < diff) {
+          bNew[i] = "0";
+        } else {           
+          bNew[i] = b[i-diff];
+        }
+        results[1][i] = bNew[i];
+        results[0][i] = a[i];
+      }
+    }
+    return results;
+    }
+    
+  }
+  public static String add(String a, String b) {
+    String aNew = removingZeros(a,b)[0];
+    String bNew = removingZeros(a,b)[1];
+    int length = Math.max(aNew.split("").length, bNew.split("").length);
+    String[] aArray = new String[length];
+    String[] bArray = new String[length];
+
+    for(int i = 0; i < length ; i++) {
+      aArray[i] = pairingStrings(aNew.split(""), bNew.split(""))[0][i];
+      bArray[i] = pairingStrings(aNew.split(""), bNew.split(""))[1][i];
+    }     
+
+    int store = 0;
+    String sumString = "";
+    String[] sumResults = new String[length];
+  
+    for(int i = length - 1; i >= 0 ; i--) {
+      int sumIndex =  store + Integer.valueOf(aArray[i]) + Integer.valueOf(bArray[i]);
+      store = 0;
+      if(sumIndex > 9) {
+        store = 1;
+        if(i == 0) {
+          sumResults[i] = String.valueOf(sumIndex);
+        } else {
+          sumResults[i] = String.valueOf(sumIndex).split("")[1];
+        }
+        
+      } else {
+        sumResults[i] = String.valueOf(sumIndex);
+      } 
+    }
+    for(String results : sumResults) {
+      sumString += results;
+    }
+    return sumString;
+  }
+}
