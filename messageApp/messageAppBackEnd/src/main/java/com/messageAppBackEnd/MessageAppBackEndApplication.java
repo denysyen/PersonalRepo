@@ -29,7 +29,8 @@ public class MessageAppBackEndApplication {
                 registry.addMapping("/**")
                 .allowedOrigins("http://localhost:4200")
                 .allowedMethods(
-                    HttpMethod.GET.name(), 
+                    HttpMethod.GET.name(),
+                    HttpMethod.PUT.name(), 
                     HttpMethod.POST.name(),
                     HttpMethod.DELETE.name())
                 .allowedHeaders(HttpHeaders.CONTENT_TYPE,
