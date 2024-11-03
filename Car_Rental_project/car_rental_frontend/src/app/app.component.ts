@@ -10,7 +10,8 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NzSpinModule,
+  imports: [RouterOutlet, 
+    NzSpinModule,
     NzFormModule,
     NzButtonModule,
     NzInputModule,
