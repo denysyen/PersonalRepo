@@ -62,7 +62,7 @@ public class JWTUtil {
     }
 
     private Key getSigningKey() {
-        byte[] keyBytes = Decoders.BASE64.decode("413F44284B625065536B566D597033733673");
+        byte[] keyBytes = Decoders.BASE64.decode("413F44284B625065536B566D597033733676397924422646294B404D6351");
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
