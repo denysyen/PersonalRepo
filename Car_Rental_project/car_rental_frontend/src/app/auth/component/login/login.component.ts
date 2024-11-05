@@ -7,6 +7,8 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { StorageService } from '../../services/storage/storage.service';
+import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +26,9 @@ export class LoginComponent implements OnInit {
   isSpinning: boolean = false;
   loginForm!: FormGroup;
 
-  constructor( private fb: FormBuilder, private authService: AuthService) { }
+  constructor( private fb: FormBuilder, 
+    private authService: AuthService, private router: Router, 
+    private message: NzMessageService) { }
 
   ngOnInit() {
       this.loginForm = this.fb.group({
@@ -44,6 +48,15 @@ export class LoginComponent implements OnInit {
         }
         StorageService.saveUser(user)
         StorageService.saveToken(res.jwt);
+        if(StorageService.isAdminLoggedIn()) {
+          this.router.navigateByUrl("/admin/dashboard");
+        } else if (StorageService.isCustomerLoggedIn()) {
+          this.router.navigateByUrl("/customer/dashboard")
+        } else {
+          this.message.error("Bad credentials", {nzDuration: 3000});
+        }
+        
+        
       }
     })
   }
