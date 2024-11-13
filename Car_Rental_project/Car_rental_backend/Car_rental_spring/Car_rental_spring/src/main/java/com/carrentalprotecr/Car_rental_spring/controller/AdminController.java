@@ -1,7 +1,6 @@
 package com.carrentalprotecr.Car_rental_spring.controller;
 
 import java.io.IOException;
-import java.util.stream.Collectors;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -43,6 +42,12 @@ public class AdminController {
     public ResponseEntity<Void> deleteCar(@PathVariable Long id) {
         adminService.deleteCar(id);
         return ResponseEntity.ok(null);
+    }
+
+    @GetMapping("/car/{id}")
+    public ResponseEntity<CarDto> getCarById(@PathVariable Long id) {
+        CarDto carDto =  adminService.getCarById(id);
+        return ResponseEntity.ok(carDto);
     }
 
 }

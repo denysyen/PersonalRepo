@@ -30,4 +30,16 @@ export class AdminService {
     .set('Authorization','Bearer' + StorageService.getToken())
     .set("Content-Type", "application/json; charset=UTF-8");
   }
+
+  getCarById(id: number): Observable<any> {
+    return this.http.get(BASIC_URL + "/api/admin/car" + id, {
+      headers: this.createAutherizationHeader()
+    });
+  }
+
+  deleteCar(id: number): Observable<any> {
+    return this.http.delete(BASIC_URL + "/api/car/" + id, {
+      headers: this.createAutherizationHeader()
+    });
+  }
 }
