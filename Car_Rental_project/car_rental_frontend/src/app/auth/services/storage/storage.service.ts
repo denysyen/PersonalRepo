@@ -25,7 +25,7 @@ export class StorageService {
         // running an app in server side while window object
         // come from the browser side, need to avoid pre-render issues 
         if (typeof window !== 'undefined') {
-            getTokenFromStorage = localStorage ? localStorage.getItem(USER) : null;
+            getTokenFromStorage = localStorage ? localStorage.getItem(TOKEN) : null;
         }
         return getTokenFromStorage || null;
     }
