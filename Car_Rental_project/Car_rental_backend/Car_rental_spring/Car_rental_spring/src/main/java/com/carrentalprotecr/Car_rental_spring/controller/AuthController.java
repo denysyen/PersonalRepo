@@ -55,7 +55,6 @@ public class AuthController {
     public AuthenticationReponse createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws 
     BadCredentialsException, DisabledException, UsernameNotFoundException { 
         try {
-             System.out.println("credentials ==" + authenticationRequest);
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword()));
         } catch(BadCredentialsException e) {
             throw new BadCredentialsException("Incorrect username or password");

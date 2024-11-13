@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 @EnableMethodSecurity
 @RequiredArgsConstructor
-public class WebSecurityConfiguration {
+public class WebSecurityConfiguration  {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserService userService;
@@ -42,6 +42,7 @@ public class WebSecurityConfiguration {
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
 
     @Bean
     public AuthenticationProvider authenticationProvider() {

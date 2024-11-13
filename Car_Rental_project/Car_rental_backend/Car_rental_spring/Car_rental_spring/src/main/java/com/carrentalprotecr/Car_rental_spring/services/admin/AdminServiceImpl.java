@@ -1,6 +1,8 @@
 package com.carrentalprotecr.Car_rental_spring.services.admin;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,18 @@ public class AdminServiceImpl  implements AdminService {
              e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<CarDto> getAllCars() {
+       return carRepository.findAll().stream()
+        .map(Car::getCarDto)
+        .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteCar(Long id) {
+        carRepository.deleteById(id);
     }
 
 
