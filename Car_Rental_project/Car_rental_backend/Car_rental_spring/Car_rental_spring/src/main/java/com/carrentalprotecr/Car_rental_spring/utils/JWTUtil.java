@@ -1,5 +1,6 @@
 package com.carrentalprotecr.Car_rental_spring.utils;
 
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -63,8 +64,9 @@ public class JWTUtil {
     }
 
     private Key getSigningKey() {
-        byte[] keyBytes = Decoders.BASE64.decode("413F44284B625065536B566D597033733676397924422646294B404D6351");
-        return Keys.hmacShaKeyFor(keyBytes);
+        // byte[] keyBytes = Decoders.BASE64.decode("413F44284B625065536B566D597033733676397924422646294B404D6351");
+        String key  = "jxgEQeXHuPq8VdbyYFNkANdudQ53YUn4";
+        return Keys.hmacShaKeyFor(key.getBytes(StandardCharsets.UTF_8));
     }
 
 }

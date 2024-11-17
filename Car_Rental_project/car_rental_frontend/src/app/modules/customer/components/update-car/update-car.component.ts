@@ -67,16 +67,19 @@ export class UpdateCarComponent {
       formData.append('description', this.updateForm.get('description')?.value);
       formData.append('price', this.updateForm.get('price')?.value);
       console.log(formData);
-      this.adminService.updateCar(this.carId, formData).subscribe((res) => {
+      this.adminService.updateCar(this.carId, formData).subscribe({
+        next: (res) => {
         this.message.success("Car updated successfullu", {nzDuration : 3000});
         this.isSpinnig = false;
           this.router.navigateByUrl("/admin/dashboard");
           console.log(res);
-      }, error => {
-        this.message.error("Error while updating car", {nzDuration: 3000})
+        }, 
+        error: (error) => {
+          console.log(error);
+          this.message.error("Error while updating car", {nzDuration: 3000})
+        }
       });
-
-   }
+  }
 
    onFileSelected(event:any) {
      this.selectedFile = event.target.files[0];

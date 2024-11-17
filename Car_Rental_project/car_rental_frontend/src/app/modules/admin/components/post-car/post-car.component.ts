@@ -51,13 +51,17 @@ export class PostCarComponent {
           formData.append('description', this.postCarForm.get('description')?.value);
           formData.append('price', this.postCarForm.get('price')?.value);
           console.log(formData);
-          this.adminService.postCar(formData).subscribe((res) => {
+          this.adminService.postCar(formData).subscribe({
+            next: (res) => {
             this.message.success("Car posted successfullu", {nzDuration : 3000});
             this.isSpinning = false;
-             this.router.navigateByUrl("/admin/dashboard");
-             console.log(res);
-          }, error => {
-            this.message.error("Error while posting car", {nzDuration: 3000})
+              this.router.navigateByUrl("/admin/dashboard");
+              console.log(res);
+            }, 
+            error: (error) => {
+              console.log(error);
+              this.message.error("Error while posting car", {nzDuration: 3000})
+            }
           });
       }
 

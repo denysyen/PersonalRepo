@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StorageService } from '../../../auth/services/storage/storage.service';
 
-const BASIC_URL = ["http://localhost:8080"];
+const BASIC_URL = "http://localhost:8080";
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +26,11 @@ export class AdminService {
 
   createAutherizationHeader(): HttpHeaders {
     let authHeaders: HttpHeaders = new HttpHeaders();
+    // TODO --> search for a method to produce always a 
+    // signature validated JWT token for UFT-8 format
     return authHeaders
-    .set('Authorization','Bearer' + StorageService.getToken())
-    .set("Content-Type", "application/json; charset=UTF-8");
+    .set('Authorization','Bearer' + StorageService.getToken());
+     
   }
 
   getCarById(id: number): Observable<any> {

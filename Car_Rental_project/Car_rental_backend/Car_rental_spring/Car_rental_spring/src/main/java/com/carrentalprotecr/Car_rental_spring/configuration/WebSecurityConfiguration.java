@@ -34,8 +34,9 @@ public class WebSecurityConfiguration  {
     @Bean
     public SecurityFilterChain securityFilterChain( HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable).authorizeRequests(request ->
-            request.requestMatchers("/api/auth/**").permitAll()
-            .requestMatchers("/api/admin/**").hasAnyAuthority(UserRole.ADMIN.name())
+            request.requestMatchers("/api/auth/**", "/api/admin/**").permitAll()   
+            // TODO --> return ADMIN privile logic there via role authentiction 
+            //.requestMatchers("/api/admin/**").hasAnyAuthority(UserRole.ADMIN.name())
             .anyRequest().authenticated()).sessionManagement(manager -> 
             manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authenticationProvider(authenticationProvider())
