@@ -16,6 +16,11 @@ export class CcustomerService {
         headers: this.createAutherizationHeader()
     });
   }
+  getCarById(cardId: number): Observable<any> {
+    return this.http.get(BASIC_URL + "/api/customer/car/" + cardId, {
+      headers: this.createAutherizationHeader()
+  });
+  } 
 
   createAutherizationHeader(): HttpHeaders {
     let authHeaders: HttpHeaders = new HttpHeaders();

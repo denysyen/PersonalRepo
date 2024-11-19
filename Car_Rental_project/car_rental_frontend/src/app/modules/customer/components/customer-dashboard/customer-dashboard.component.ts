@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CcustomerService } from '../../services/ccustomer.service';
 import { CommonModule, DatePipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-customer-dashboard',
   standalone: true,
-  imports: [CommonModule, DatePipe ],
+  imports: [CommonModule, DatePipe, RouterModule],
   templateUrl: './customer-dashboard.component.html',
   styleUrl: './customer-dashboard.component.css'
 })

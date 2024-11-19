@@ -55,4 +55,10 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return false;
     }
+
+    @Override
+    public CarDto getCarDto(Long carId) {
+       Optional<Car> optionalCar = carRepository.findById(carId);
+       return optionalCar.map(Car::getCarDto).orElse(null);
+    }
 }

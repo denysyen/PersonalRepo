@@ -8,5 +8,6 @@ import com.carrentalprotecr.Car_rental_spring.dto.CarDto;
 public interface CustomerService {
     List<CarDto> getAllCars();
     boolean bookCar(BookCarDto bookCarDto);
+    CarDto getCarDto(Long carId);
 
 }
