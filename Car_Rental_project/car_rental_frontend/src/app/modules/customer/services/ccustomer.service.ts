@@ -16,10 +16,23 @@ export class CcustomerService {
         headers: this.createAutherizationHeader()
     });
   }
+
   getCarById(cardId: number): Observable<any> {
     return this.http.get(BASIC_URL + "/api/customer/car/" + cardId, {
       headers: this.createAutherizationHeader()
-  });
+    });
+  }
+
+ getBookingsByUserId(): Observable<any> {
+    return this.http.get(BASIC_URL + "/api/customer/car/bookings" + StorageService.getUserId(), {
+      headers: this.createAutherizationHeader()
+    });
+  }
+
+  bookCar(bookCarDto: any): Observable<any> {
+    return this.http.post(BASIC_URL + "/api/customer/car/book" + bookCarDto, {
+      headers: this.createAutherizationHeader()
+    });
   } 
 
   createAutherizationHeader(): HttpHeaders {

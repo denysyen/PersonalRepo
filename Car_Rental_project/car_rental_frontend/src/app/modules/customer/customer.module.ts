@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CustomerRoutingModule } from './customer-routing.module';
 import { NgZorroImportsModule } from '../../NgZorroImportsModule';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UpdateCarComponent } from './components/update-car/update-car.component';
 
 
@@ -13,7 +13,8 @@ import { UpdateCarComponent } from './components/update-car/update-car.component
     CommonModule,
     CustomerRoutingModule,
     NgZorroImportsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
