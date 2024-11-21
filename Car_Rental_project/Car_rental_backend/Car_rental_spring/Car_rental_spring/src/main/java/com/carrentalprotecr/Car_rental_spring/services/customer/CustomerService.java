@@ -9,5 +9,6 @@ public interface CustomerService {
     List<CarDto> getAllCars();
     boolean bookCar(BookCarDto bookCarDto);
     CarDto getCarDto(Long carId);
+    List<BookCarDto> getBookingsByUserId(Long userId);
 
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.carrentalprotecr.Car_rental_spring.dto.BookCarDto;
 import com.carrentalprotecr.Car_rental_spring.enums.BookCarStatus;
 
 import jakarta.persistence.Entity;
@@ -37,6 +38,21 @@ public class BookCar {
     @JoinColumn(name="car_id", nullable = false)
     @OnDelete(action =OnDeleteAction.CASCADE)
     private Car car;
+
+    public BookCarDto getBookCarDto() {
+        BookCarDto bookCarDto =  new BookCarDto();
+        bookCarDto.setCarId(id);
+        bookCarDto.setDays(days);
+        bookCarDto.setBookCarStatus(bookCarStatus);
+        bookCarDto.setPrice(price);
+        bookCarDto.setToDate(toDate);
+        bookCarDto.setFromDate(fromDate);
+        bookCarDto.setEmail(user.getEmail());
+        bookCarDto.setUsername(user.getName());
+        bookCarDto.setCarId(car.getId());
+
+        return bookCarDto;
+    }
 
 
 }
