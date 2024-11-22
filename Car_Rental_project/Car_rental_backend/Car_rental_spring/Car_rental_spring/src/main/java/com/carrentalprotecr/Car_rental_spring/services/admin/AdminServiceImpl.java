@@ -7,8 +7,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.carrentalprotecr.Car_rental_spring.dto.BookCarDto;
 import com.carrentalprotecr.Car_rental_spring.dto.CarDto;
+import com.carrentalprotecr.Car_rental_spring.entity.BookCar;
 import com.carrentalprotecr.Car_rental_spring.entity.Car;
+import com.carrentalprotecr.Car_rental_spring.repository.BookCarRepository;
 import com.carrentalprotecr.Car_rental_spring.repository.CarRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -17,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AdminServiceImpl  implements AdminService {
     private final CarRepository carRepository;
+    private final BookCarRepository bookCarRepository;
 
     @Override
     public boolean postCar(CarDto carDto)  {
@@ -67,7 +71,6 @@ public class AdminServiceImpl  implements AdminService {
             try {
                 existingCar.setImage(carDto.getImage().getBytes());
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             existingCar.setYear(carDto.getYear());
@@ -82,6 +85,13 @@ public class AdminServiceImpl  implements AdminService {
         }
        }
        return false;
+    }
+
+    @Override
+    public List<BookCarDto> getBookings() {
+       return bookCarRepository.findAll().stream()
+            .map(BookCar::getBookCarDto)
+            .collect(Collectors.toList());
     }
 
 

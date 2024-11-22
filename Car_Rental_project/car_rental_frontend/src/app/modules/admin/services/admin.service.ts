@@ -50,4 +50,10 @@ export class AdminService {
       headers: this.createAutherizationHeader()
     });
   }
+
+  getCarBookings(): Observable<any> {
+    return this.http.get(BASIC_URL + "/api/admin/car/bookings", {
+        headers: this.createAutherizationHeader()
+    });
+  }
 }

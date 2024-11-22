@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.carrentalprotecr.Car_rental_spring.dto.BookCarDto;
 import com.carrentalprotecr.Car_rental_spring.dto.CarDto;
 import com.carrentalprotecr.Car_rental_spring.services.admin.AdminService;
 
@@ -65,5 +66,11 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
      }
     }
+    
+    @GetMapping("/car/bookings")
+    public ResponseEntity<List<BookCarDto>> getBookings() {
+        return ResponseEntity.ok(adminService.getBookings());
+    }
+
 
 }
