@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.carrentalprotecr.Car_rental_spring.dto.BookCarDto;
 import com.carrentalprotecr.Car_rental_spring.dto.CarDto;
+import com.carrentalprotecr.Car_rental_spring.dto.CarDtoListDto;
+import com.carrentalprotecr.Car_rental_spring.dto.SearchCarDto;
 
 public interface AdminService {
     boolean postCar(CarDto carDto) throws IOException;
@@ -14,5 +16,6 @@ public interface AdminService {
     boolean updateCar(Long carId, CarDto carDto);
     List<BookCarDto> getBookings();
     boolean changeBookingStatus(Long bookingId, String status);
+    CarDtoListDto searchCar(SearchCarDto searchCarDto);
 
 }

@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.carrentalprotecr.Car_rental_spring.dto.BookCarDto;
 import com.carrentalprotecr.Car_rental_spring.dto.CarDto;
+import com.carrentalprotecr.Car_rental_spring.dto.SearchCarDto;
 import com.carrentalprotecr.Car_rental_spring.services.admin.AdminService;
 
 import lombok.RequiredArgsConstructor;
@@ -80,6 +82,11 @@ public class AdminController {
         }
 
         return ResponseEntity.notFound().build();
+    }
+    
+    @PostMapping("/car/serch")
+    public ResponseEntity<?> searchCar(@RequestBody SearchCarDto searchCarDto) {
+        return ResponseEntity.ok(adminService.searchCar(searchCarDto));
     }
 
 
