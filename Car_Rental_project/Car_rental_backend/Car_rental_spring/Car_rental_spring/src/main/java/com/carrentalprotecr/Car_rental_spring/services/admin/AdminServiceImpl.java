@@ -2,6 +2,7 @@ package com.carrentalprotecr.Car_rental_spring.services.admin;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,7 @@ import com.carrentalprotecr.Car_rental_spring.dto.BookCarDto;
 import com.carrentalprotecr.Car_rental_spring.dto.CarDto;
 import com.carrentalprotecr.Car_rental_spring.entity.BookCar;
 import com.carrentalprotecr.Car_rental_spring.entity.Car;
+import com.carrentalprotecr.Car_rental_spring.enums.BookCarStatus;
 import com.carrentalprotecr.Car_rental_spring.repository.BookCarRepository;
 import com.carrentalprotecr.Car_rental_spring.repository.CarRepository;
 
@@ -92,6 +94,22 @@ public class AdminServiceImpl  implements AdminService {
        return bookCarRepository.findAll().stream()
             .map(BookCar::getBookCarDto)
             .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean changeBookingStatus(Long bookingId, String status) {
+        Optional<BookCar> optionalCar = bookCarRepository.findById(bookingId);
+        if(optionalCar.isPresent()) {
+            BookCar existingBookCar = optionalCar.get();
+            if(Objects.equals(status, "Approve")) {
+                existingBookCar.setBookCarStatus(BookCarStatus.APPROVED);
+            } else {
+                existingBookCar.setBookCarStatus(BookCarStatus.REJECTED);
+            }
+            bookCarRepository.save(existingBookCar);
+            return true;
+        }
+        return false; 
     }
 
 

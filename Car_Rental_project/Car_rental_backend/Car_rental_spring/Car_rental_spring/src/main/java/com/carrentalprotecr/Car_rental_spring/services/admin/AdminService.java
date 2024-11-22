@@ -13,5 +13,6 @@ public interface AdminService {
     CarDto getCarById(Long id);
     boolean updateCar(Long carId, CarDto carDto);
     List<BookCarDto> getBookings();
+    boolean changeBookingStatus(Long bookingId, String status);
 
 }
