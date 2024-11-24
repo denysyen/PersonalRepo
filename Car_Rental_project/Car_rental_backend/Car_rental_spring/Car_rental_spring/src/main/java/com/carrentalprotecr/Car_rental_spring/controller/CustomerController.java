@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.carrentalprotecr.Car_rental_spring.dto.BookCarDto;
 import com.carrentalprotecr.Car_rental_spring.dto.CarDto;
+import com.carrentalprotecr.Car_rental_spring.dto.SearchCarDto;
 import com.carrentalprotecr.Car_rental_spring.services.customer.CustomerService;
 
 import lombok.RequiredArgsConstructor;
@@ -50,6 +51,11 @@ public class CustomerController {
     @GetMapping("/car/booking/{userId}")
     public ResponseEntity<List<BookCarDto>> getBookingsByUserId(@PathVariable Long userId) {
         return ResponseEntity.ok(customerService.getBookingsByUserId(userId));
+    }
+
+        @PostMapping("/car/serch")
+    public ResponseEntity<?> searchCar(@RequestBody SearchCarDto searchCarDto) {
+        return ResponseEntity.ok(customerService.searchCar(searchCarDto));
     }
 
 }
