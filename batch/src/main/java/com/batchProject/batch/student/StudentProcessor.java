@@ -8,9 +8,10 @@ public class StudentProcessor implements ItemProcessor<Student, Student> {
 
     @Override
     @Nullable
-    public Student process(@NonNull Student arg0) throws Exception {
+    public Student process(@NonNull Student student) throws Exception {
         // normally the transformation and processing logics goes here ! 
-        return arg0;
+        student.setId(null); // Hibernate will persist and create a new Id with the desire Strategy
+        return student;
     }
      
 }
