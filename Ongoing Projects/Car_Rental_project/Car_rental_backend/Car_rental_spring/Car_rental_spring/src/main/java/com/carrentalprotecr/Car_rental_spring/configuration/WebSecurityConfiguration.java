@@ -45,7 +45,7 @@ public class WebSecurityConfiguration  {
     }
 
 
-    @Bean
+    @Bean // why a bean is need here ?? Search information only to understand @Beans annotation
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userService.userDetailsService());
