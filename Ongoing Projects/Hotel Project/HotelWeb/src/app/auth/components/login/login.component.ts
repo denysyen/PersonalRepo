@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../../service/auth/auth.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Router } from '@angular/router';
-import { Inject } from '@angular/core';
 import { UserStotageService } from '../../service/storage/user-stotage.service';
 
 @Component({
@@ -38,6 +37,12 @@ export class LoginComponent {
         }
         UserStotageService.saveUser(user);
         UserStotageService.saveToken(res.jwt);
+
+        if(UserStotageService.isAdminLoggedIn()) {
+          this.router.navigateByUrl('/admin/dashboard');
+        }else if(UserStotageService.isCustomerLoggedIn()) {
+          this.router.navigateByUrl('/customer/rooms')
+        }
       }
     }, error => {
       this.message.error( `Bad credentials`, { nzDuration: 5000})
