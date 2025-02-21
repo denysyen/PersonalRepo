@@ -1,5 +1,7 @@
 package com.hotelManagement.HotelServer.entity;
 
+import com.hotelManagement.HotelServer.dto.RoomDto;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,5 +20,17 @@ public class Room {
 
     private Long price;
     private boolean available;
+
+    public RoomDto getRoomDto() {
+        RoomDto roomDto = new RoomDto();
+
+        roomDto.setId(id);
+        roomDto.setName(name);
+        roomDto.setPrice(price);
+        roomDto.setType(type);
+        roomDto.setAvailable(available);
+
+        return roomDto;
+    }
 
 }

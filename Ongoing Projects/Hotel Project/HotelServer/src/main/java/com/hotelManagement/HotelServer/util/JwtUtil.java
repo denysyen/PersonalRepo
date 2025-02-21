@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -30,6 +31,7 @@ public class JwtUtil {
             throw new RuntimeException(e);
         } 
      }
+
     // this method task is to generate a Token from the extracted claim coming from the front-end
     private String generateToken(Map<String, Object> extraClaims, UserDetails details) {
         return Jwts.builder().setClaims(extraClaims).setSubject(details.getUsername())
@@ -49,9 +51,11 @@ public class JwtUtil {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(getSigningKey())
-                .parseClaimsJws(token)
-                .getBody();
+        Jws<Claims> jws = Jwts.parser()
+                .setSigningKey(getSigningKey())
+                .parseClaimsJws(token);
+                
+        return jws.getBody();
     }
     //  Here calling the interface function allows to access the method apply
     // that allow us to excecute a function within a context similar to the .bind() 
