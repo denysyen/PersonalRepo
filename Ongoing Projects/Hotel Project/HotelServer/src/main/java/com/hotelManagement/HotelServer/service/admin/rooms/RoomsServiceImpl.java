@@ -1,5 +1,6 @@
 package com.hotelManagement.HotelServer.service.admin.rooms;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
@@ -12,6 +13,7 @@ import com.hotelManagement.HotelServer.dto.RoomsReponseDto;
 import com.hotelManagement.HotelServer.entity.Room;
 import com.hotelManagement.HotelServer.repository.RoomRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -37,15 +39,49 @@ public class RoomsServiceImpl implements RoomsService {
    }
 
    public RoomsReponseDto getAllReponse(int pageNumber) {
-     Pageable pageable =  PageRequest.of(pageNumber, 6);
-     Page<Room> roomPage = roomRepository.findAll(pageable);
-    
-     RoomsReponseDto roomsReponseDto = new RoomsReponseDto();
-     roomsReponseDto.setPageNumber(roomPage.getPageable().getPageNumber());
-     roomsReponseDto.setTotalPages(roomPage.getTotalPages());
-     roomsReponseDto.setRoomDtoList(roomPage.stream().map(Room::getRoomDto).collect(Collectors.toList()));
+      Pageable pageable =  PageRequest.of(pageNumber, 2);
+      Page<Room> roomPage = roomRepository.findAll(pageable);
+      
+      RoomsReponseDto roomsReponseDto = new RoomsReponseDto();
+      roomsReponseDto.setPageNumber(roomPage.getPageable().getPageNumber());
+      roomsReponseDto.setTotalPages(roomPage.getTotalPages());
+      roomsReponseDto.setRoomDtoList(roomPage.stream().map(Room::getRoomDto).collect(Collectors.toList()));
 
-     return roomsReponseDto;
+      return roomsReponseDto;
 
+   }
+
+   public RoomDto getRoomById(long id) {
+      Optional<Room> optionalRoom = roomRepository.findById(id);
+      if(optionalRoom.isPresent()) {
+        return optionalRoom.get().getRoomDto();
+      } else {
+        throw new EntityNotFoundException("Room not present");
+      }
+   }
+
+   public boolean updateRoom(Long id, RoomDto roomDto) {
+      Optional<Room> optionalRoom = roomRepository.findById(id);
+      if(optionalRoom.isPresent()) {
+        Room existingRoom = optionalRoom.get();
+
+        existingRoom.setName(roomDto.getName());
+        existingRoom.setPrice(roomDto.getPrice());
+        existingRoom.setType(roomDto.getType());
+
+        roomRepository.save(existingRoom);
+
+        return true;
+      }
+      return false;
+   }
+
+   public void deleteRoom(Long id){
+      Optional<Room> optionalRoom = roomRepository.findById(id);
+      if(optionalRoom.isPresent()){
+         roomRepository.deleteById(id);
+      } else {
+         throw new EntityNotFoundException("Room not present.");
+      }
    }
 }
